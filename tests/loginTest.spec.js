@@ -1,19 +1,28 @@
 const {test, expect} = require('@playwright/test');
+const {LoginPage} = require('../pageobjects/LoginPage');
+const { loadEnvFile } = require('node:process');
+//JSON->string->js object
+const loginDataSet = JSON.parse(JSON.stringify(require('../utils/loginTestData.json')));
+const {InventoryPage} = require('../pageobjects/InventoryPage');
+const { exec } = require('node:child_process');
 //login standard_user / secret_sauce
 //getByRole and getByPlaceholder
 
-test('Successful login using getByRole locators',async ({page})=>{
-    await page.goto("https://www.saucedemo.com/");
-    await page.getByRole("textbox",{name: 'Username'}).fill("standard_user");
-    await page.getByRole('textbox',{name: 'Password'}).fill("secret_sauce");
-    await page.getByRole('button',{name: 'Login'}).click();
-    await expect(page).toHaveTitle("Swag Labs");
+test('TC-LOGIN-001 Login with valid credentials - standard user',async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.validLogin(loginDataSet.standard_username,loginDataSet.standard_password);
+    const inventoryPage = new InventoryPage(page);
+    await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(inventoryPage.heading).toBeVisible();
+    await expect(inventoryPage.inventoryList.first()).toBeVisible();
 });
 
-test('Successful login using getByPlaceholder locators',async ({page})=>{
-    await page.goto("https://www.saucedemo.com/");
-    await page.getByPlaceholder("Username",{name: 'Username'}).fill("standard_user");
-    await page.getByPlaceholder('Password',{name: 'Password'}).fill("secret_sauce");
-    await page.getByRole('button',{name: 'Login'}).click();
-    await expect(page).toHaveTitle("Swag Labs");
+test.only('TC-LOGIN-002 Login with invalid username', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.fillUsernameTextInput(loginDataSet.invalid_username);
+    await loginPage.fillPasswordTextInput(loginDataSet.standard_password);
+    await loginPage.clickLoginButton();
+    await expect(loginPage.InvalidUsernameAndPasswordAlert).toBeVisible();
 });
