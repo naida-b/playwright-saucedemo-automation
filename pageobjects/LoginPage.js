@@ -3,10 +3,10 @@ class LoginPage {
     constructor(page)
     {
         this.page = page;
-        this.usernameTextInput = page.getByRole("textbox",{name: 'Username'});
-        this.passwordTextInput = page.getByRole('textbox',{name: 'Password'});
+        this.usernameTextInput = page.getByLabel('Username');
+        this.passwordTextInput = page.getByLabel('Password');
         this.loginButton = page.getByRole('button',{name: 'Login'});
-        this.InvalidUsernameAndPasswordAlert = page.getByRole('alert');
+        this.invalidUsernameAndPasswordAlert = page.getByRole('alert');
     }
 
     async goTo()
