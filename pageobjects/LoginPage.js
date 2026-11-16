@@ -11,10 +11,10 @@ class LoginPage {
 
     async goTo()
     {
-        await this.page.goto("https://www.saucedemo.com/");
+        await this.page.goto("/");
     }
 
-    async validLogin(username, password){
+    async login(username, password){
         await this.usernameTextInput.fill(username);
         await this.passwordTextInput.fill(password);
         await this.loginButton.click();

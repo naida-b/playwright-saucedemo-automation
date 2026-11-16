@@ -11,7 +11,10 @@ module.exports = defineConfig({
   reporter: 'html',
 
   use: {
+    baseURL: 'https://www.saucedemo.com',
     browserName: 'chromium',
     headless: true,
+    screenshot : 'on',
+    trace: 'on'
   },
 });
