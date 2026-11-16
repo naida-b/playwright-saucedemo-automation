@@ -14,7 +14,7 @@ module.exports = defineConfig({
     baseURL: 'https://www.saucedemo.com',
     browserName: 'chromium',
     headless: true,
-    screenshot : 'on',
-    trace: 'on'
+    screenshot : 'only-on-failure',
+    trace: 'retain-on-failure'
   },
 });

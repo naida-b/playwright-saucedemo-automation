@@ -3,8 +3,8 @@ class LoginPage {
     constructor(page)
     {
         this.page = page;
-        this.usernameTextInput = page.getByLabel('Username');
-        this.passwordTextInput = page.getByLabel('Password');
+        this.usernameInput = page.getByLabel('Username');
+        this.passwordInput = page.getByLabel('Password');
         this.loginButton = page.getByRole('button',{name: 'Login'});
         this.alert = page.getByRole('alert');
     }
@@ -15,17 +15,17 @@ class LoginPage {
     }
 
     async login(username, password){
-        await this.usernameTextInput.fill(username);
-        await this.passwordTextInput.fill(password);
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
 
     async fillUsernameTextInput(username){
-        await this.usernameTextInput.fill(username);
+        await this.usernameInput.fill(username);
     }
 
     async fillPasswordTextInput(password){
-        await this.passwordTextInput.fill(password);
+        await this.passwordInput.fill(password);
     }
 
     async clickLoginButton(){
@@ -33,11 +33,11 @@ class LoginPage {
     }
 
     async resetUsernameTextInput(){
-        await this.usernameTextInput.fill("");
+        await this.usernameInput.fill("");
     }
 
     async resetPasswordTextInput(){
-        await this.passwordTextInput.fill("");
+        await this.passwordInput.fill("");
     }
 
 

@@ -12,6 +12,9 @@ test('TC-LOGIN-001 Login with valid credentials - standard user',async ({page})=
     await expect(inventoryPage.heading).toBeVisible();
     await expect(inventoryPage.heading).toHaveText("Products");
     await expect(inventoryPage.inventoryList).toHaveCount(6);
+    for (let i = 0; i < loginDataSet.inventoryPageItemListCount; i++) {
+    await expect(inventoryPage.inventoryList.nth(i)).toBeVisible();
+} 
     await expect(inventoryPage.inventoryList.first()).toBeVisible();
 });
 
