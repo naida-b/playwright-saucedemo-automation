@@ -62,3 +62,30 @@ test('TC-LOGIN-006 Login with both fields empty', async ({page})=>{
     await expect(loginPage.alert).toBeVisible();
     await expect(loginPage.alert).toHaveText(loginDataSet.usernameRequiredAlert);
 });
+
+test('TC-LOGIN-007 Login with username containing spaces', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login(loginDataSet.standardUsernameWithSpace,loginDataSet.invalidPassword);
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+});
+
+test('TC-LOGIN-008 Login with username in incorrect letter case', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login(loginDataSet.standardUsernameWithWrongCase,loginDataSet.invalidPassword);
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+});
+
+test('TC-LOGIN-009 Login with password containing spaces', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login(loginDataSet.standardUsername,loginDataSet.standardPasswordWithSpace);
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+});

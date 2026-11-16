@@ -1,6 +1,9 @@
 {
     "standardUsername" : "standard_user",
     "standardPassword" : "secret_sauce",
+    "standardUsernameWithSpace" : "standard_user ",
+    "standardUsernameWithWrongCase" : "Standard_User ",
+    "standardPasswordWithSpace" : "secret_sauce ",
     "lockedOutUserUsername" : "locked_out_user",
     "lockedOutUserPassword" : "secret_sauce",
     "problemUserUsername" : "problem_user",
