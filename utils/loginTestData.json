@@ -1,0 +1,17 @@
+{
+    "standardUsername" : "standard_user",
+    "standardPassword" : "secret_sauce",
+    "lockedOutUserUsername" : "locked_out_user",
+    "lockedOutUserPassword" : "secret_sauce",
+    "problemUserUsername" : "problem_user",
+    "problemUserPassword" : "secret_sauce",
+    "performanceGlitchUserUsername" : "performance_glitch_user",
+    "performanceGlitchUserPassword" : "secret_sauce",
+    "errorUserUsername" : "error_user",
+    "errorUserPassword" : "secret_sauce",
+    "visualUserUsername" : "visual_user",
+    "visualUserPassword" : "secret_sauce",
+    "invalidUsername" : "standard_us",
+    "invalidPassword" : "secretsauce",
+    "invalidUsernameAndPasswordAlert" : "Epic sadface: Username and password do not match any user in this service"
+}
