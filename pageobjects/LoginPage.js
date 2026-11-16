@@ -6,7 +6,7 @@ class LoginPage {
         this.usernameTextInput = page.getByLabel('Username');
         this.passwordTextInput = page.getByLabel('Password');
         this.loginButton = page.getByRole('button',{name: 'Login'});
-        this.invalidUsernameAndPasswordAlert = page.getByRole('alert');
+        this.alert = page.getByRole('alert');
     }
 
     async goTo()

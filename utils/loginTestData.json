@@ -13,5 +13,8 @@
     "visualUserPassword" : "secret_sauce",
     "invalidUsername" : "standard_us",
     "invalidPassword" : "secretsauce",
-    "invalidUsernameAndPasswordAlert" : "Epic sadface: Username and password do not match any user in this service"
+    "invalidUsernameAndPasswordAlert" : "Epic sadface: Username and password do not match any user in this service",
+    "usernameRequiredAlert": "Epic sadface: Username is required",
+    "passwordRequiredAlert": "Epic sadface: Password is required"
+
 }

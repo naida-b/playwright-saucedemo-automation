@@ -20,8 +20,8 @@ test('TC-LOGIN-002 Login with invalid username', async ({page})=>{
     await loginPage.goTo();
     await loginPage.login(loginDataSet.invalidUsername,loginDataSet.standardPassword);
     await expect (page).toHaveURL("/");
-    await expect(loginPage.invalidUsernameAndPasswordAlert).toBeVisible();
-    await expect(loginPage.invalidUsernameAndPasswordAlert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
 });
 
 test('TC-LOGIN-003 Login with invalid password', async ({page})=>{
@@ -29,6 +29,33 @@ test('TC-LOGIN-003 Login with invalid password', async ({page})=>{
     await loginPage.goTo();
     await loginPage.login(loginDataSet.standardUsername,loginDataSet.invalidPassword);
     await expect (page).toHaveURL("/");
-    await expect(loginPage.invalidUsernameAndPasswordAlert).toBeVisible();
-    await expect(loginPage.invalidUsernameAndPasswordAlert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.invalidUsernameAndPasswordAlert);
+});
+
+test('TC-LOGIN-004 Login with empty username', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login("",loginDataSet.standardPassword);
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.usernameRequiredAlert);
+});
+
+test('TC-LOGIN-005 Login with empty password', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login(loginDataSet.standardUsername,"");
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.passwordRequiredAlert);
+});
+
+test('TC-LOGIN-006 Login with both fields empty', async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await loginPage.login("","");
+    await expect (page).toHaveURL("/");
+    await expect(loginPage.alert).toBeVisible();
+    await expect(loginPage.alert).toHaveText(loginDataSet.usernameRequiredAlert);
 });
