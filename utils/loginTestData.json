@@ -21,7 +21,7 @@
     "passwordRequiredAlert": "Epic sadface: Password is required",
     "inventoryPageURL": "https://www.saucedemo.com/inventory.html",
     "inventoryAccessDeniedAlert" : "Epic sadface: You can only access '/inventory.html' when you are logged in.",
-    "inventoryPageItemListCount" : "6",
+    "inventoryPageItemListCount" : 6,
     "lockedOutUserAlert": "Epic sadface: Sorry, this user has been locked out."
 
 }

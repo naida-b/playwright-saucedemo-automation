@@ -9,7 +9,7 @@ class LoginPage {
         this.alert = page.getByRole('alert');
     }
 
-    async goTo(url)
+    async goTo(url = "/")
     {
         await this.page.goto(url);
     }
