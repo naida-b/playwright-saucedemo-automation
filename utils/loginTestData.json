@@ -2,7 +2,7 @@
     "standardUsername" : "standard_user",
     "standardPassword" : "secret_sauce",
     "standardUsernameWithSpace" : "standard_user ",
-    "standardUsernameWithWrongCase" : "Standard_User ",
+    "standardUsernameWithWrongCase" : "Standard_User",
     "standardPasswordWithSpace" : "secret_sauce ",
     "lockedOutUserUsername" : "locked_out_user",
     "lockedOutUserPassword" : "secret_sauce",
@@ -19,5 +19,9 @@
     "invalidUsernameAndPasswordAlert" : "Epic sadface: Username and password do not match any user in this service",
     "usernameRequiredAlert": "Epic sadface: Username is required",
     "passwordRequiredAlert": "Epic sadface: Password is required",
-    "inventoryPageItemListCount" : "6"
+    "inventoryPageURL": "https://www.saucedemo.com/inventory.html",
+    "inventoryAccessDeniedAlert" : "Epic sadface: You can only access '/inventory.html' when you are logged in.",
+    "inventoryPageItemListCount" : "6",
+    "lockedOutUserAlert": "Epic sadface: Sorry, this user has been locked out."
+
 }
