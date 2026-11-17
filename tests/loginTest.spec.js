@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 const {LoginPage} = require('../pageobjects/LoginPage');
-const loginDataSet = require('../utils/loginTestData.json');
+const loginDataSet = require('../testdata/loginTestData.json');
 const {InventoryPage} = require('../pageobjects/InventoryPage');
 
 test('TC-LOGIN-001 Login with valid credentials - standard user',async ({page})=>{
