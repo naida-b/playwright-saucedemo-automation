@@ -11,6 +11,11 @@ class LoginAssertions{
         await expect(loginPage.passwordInput).toBeVisible();
         await expect(loginPage.loginButton).toBeVisible();
     }
+
+    static async expectLoginFormEmpty(loginPage){
+        await expect(loginPage.usernameInput).toBeEmpty();
+        await expect(loginPage.passwordInput).toBeEmpty();
+    }
 }
 
 module.exports = LoginAssertions;
