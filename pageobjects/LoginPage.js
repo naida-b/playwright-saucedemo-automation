@@ -32,14 +32,10 @@ class LoginPage {
         await this.loginButton.click();
     }
 
-    async resetUsernameTextInput(){
+    async clearLoginForm(){
         await this.usernameInput.fill("");
-    }
-
-    async resetPasswordTextInput(){
         await this.passwordInput.fill("");
     }
-
 
 }
 module.exports = {LoginPage};
