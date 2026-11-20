@@ -11,5 +11,16 @@ class InventoryAssertions{
             await expect(inventoryPage.inventoryItems.nth(i)).toBeVisible();
         } 
     }
+
+    static async expectProductsAndPricesToHaveExpectedCountAndValidContent(inventoryPage, expectedItemCount){
+        await expect(inventoryPage.inventoryItemsName).toHaveCount(expectedItemCount);
+        await expect(inventoryPage.inventoryItemsPrice).toHaveCount(expectedItemCount);
+        for (const item of await inventoryPage.inventoryItems.all()) {
+            const name = await item.locator('.inventory_item_name').textContent();
+            const price = await item.locator('.inventory_item_price').textContent();
+            expect(name.trim()).not.toBe('');
+            expect(price.trim()).toMatch(/^\$\d+\.\d{2}$/);
+        }
+    }
 }
 module.exports = InventoryAssertions;
