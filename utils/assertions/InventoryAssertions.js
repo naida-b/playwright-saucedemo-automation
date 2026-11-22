@@ -22,5 +22,22 @@ class InventoryAssertions{
             expect(price.trim()).toMatch(/^\$\d+\.\d{2}$/);
         }
     }
+
+    static async expectProductToExist(matchedItem){
+        await expect(matchedItem).toHaveCount(1);
+    }
+
+    static async expectItemIsAddedToCart(matchedItem){
+        expect(await matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+    }
+
+    static async expectCartBadgeDisplayed(inventoryPage, numberOfItems){
+        await expect(inventoryPage.cartBadge).toBeVisible();
+        await expect(inventoryPage.cartBadge).toHaveText(String(numberOfItems));
+    }
+
+    static async expectOneItemIsAddedToCart(inventoryPage){
+        await expect(inventoryPage.removeButtons).toHaveCount(1);
+    }
 }
 module.exports = InventoryAssertions;
