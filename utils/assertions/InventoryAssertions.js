@@ -11,5 +11,39 @@ class InventoryAssertions{
             await expect(inventoryPage.inventoryItems.nth(i)).toBeVisible();
         } 
     }
+
+    static async expectProductsAndPricesToHaveExpectedCountAndValidContent(inventoryPage, expectedItemCount){
+        await expect(inventoryPage.inventoryItemsName).toHaveCount(expectedItemCount);
+        await expect(inventoryPage.inventoryItemsPrice).toHaveCount(expectedItemCount);
+        
+        const names = await inventoryPage.inventoryItemsName.allTextContents();
+        const prices = await inventoryPage.inventoryItemsPrice.allTextContents();
+        expect(names).toHaveLength(expectedItemCount);
+        expect(prices).toHaveLength(expectedItemCount);
+        for (const name of names) {
+            expect(name.trim()).not.toBe('');
+        }
+
+        for (const price of prices) {
+            expect(price.trim()).toMatch(/^\$\d+\.\d{2}$/);
+        }
+    }
+
+    static async expectProductToExist(matchedItem){
+        await expect(matchedItem).toHaveCount(1);
+    }
+
+    static async expectItemIsAddedToCart(matchedItem){
+        await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+    }
+
+    static async expectCartBadgeDisplayed(inventoryPage, numberOfItems){
+        await expect(inventoryPage.cartBadge).toBeVisible();
+        await expect(inventoryPage.cartBadge).toHaveText(String(numberOfItems));
+    }
+
+    static async expectOneItemIsAddedToCart(inventoryPage){
+        await expect(inventoryPage.removeButtons).toHaveCount(1);
+    }
 }
 module.exports = InventoryAssertions;
