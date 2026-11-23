@@ -1,7 +1,8 @@
 class CartPage{
     constructor (page){
-        this.cartItemName = page.locator('.inventory_item_name');
-        this.cartItemPrice = page.locator('.inventory_item_price');
+        this.cartItems = page.locator('.cart_item');
+        this.cartItemName = this.cartItems.locator('.inventory_item_name');
+        this.cartItemPrice = this.cartItems.locator('.inventory_item_price');
     }
 
     async getCartProductDetails() {

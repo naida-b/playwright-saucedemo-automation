@@ -3,6 +3,7 @@ const {expect} = require('@playwright/test');
 class CartAssertions{
 
     static async expectCartItemToBeVisible(cartPage) {
+        await expect(cartPage.cartItems).toHaveCount(1);
         await expect(cartPage.cartItemName).toBeVisible();
         await expect(cartPage.cartItemPrice).toBeVisible();
     }
