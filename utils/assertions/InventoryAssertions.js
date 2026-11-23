@@ -15,10 +15,16 @@ class InventoryAssertions{
     static async expectProductsAndPricesToHaveExpectedCountAndValidContent(inventoryPage, expectedItemCount){
         await expect(inventoryPage.inventoryItemsName).toHaveCount(expectedItemCount);
         await expect(inventoryPage.inventoryItemsPrice).toHaveCount(expectedItemCount);
-        for (const item of await inventoryPage.inventoryItems.all()) {
-            const name = await item.locator('.inventory_item_name').textContent();
-            const price = await item.locator('.inventory_item_price').textContent();
+        
+        const names = await inventoryPage.inventoryItemsName.allTextContents();
+        const prices = await inventoryPage.inventoryItemsPrice.allTextContents();
+        expect(names).toHaveLength(expectedItemCount);
+        expect(prices).toHaveLength(expectedItemCount);
+        for (const name of names) {
             expect(name.trim()).not.toBe('');
+        }
+
+        for (const price of prices) {
             expect(price.trim()).toMatch(/^\$\d+\.\d{2}$/);
         }
     }
@@ -28,7 +34,7 @@ class InventoryAssertions{
     }
 
     static async expectItemIsAddedToCart(matchedItem){
-        expect(await matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+        await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
     }
 
     static async expectCartBadgeDisplayed(inventoryPage, numberOfItems){

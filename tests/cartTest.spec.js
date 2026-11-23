@@ -38,7 +38,8 @@ test('TC-CART-002 Verify cart item matches selected inventory product', async ({
     const inventoryDetails = await inventoryPage.getProductDetails(inventoryDataSet.productNameForSelection);
     await inventoryPage.goToCart();
     const cartPage = new CartPage(page);
+    await CartAssertions.expectCartItemToBeVisible(cartPage);
+    await CartAssertions.expectOneCartItemVisible(cartPage);
     const cartDetails = await cartPage.getCartProductDetails();
-
     await CartAssertions.expectCartItemToMatchInventory(inventoryDetails,cartDetails);
 });
