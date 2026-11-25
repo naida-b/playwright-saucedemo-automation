@@ -35,9 +35,9 @@ test('TC-INV-003 Verify that a product can be added to cart by matching its name
     const inventoryPage = new InventoryPage(page);
     await InventoryAssertions.expectInventoryPageToBeOpenAndLoaded(inventoryPage, inventoryDataSet.inventoryPageItemListCount);
     const matchedItem = await inventoryPage.getProduct(inventoryDataSet.productNameForSelection);
-    await InventoryAssertions.expectProductToExist(matchedItem);
+    await InventoryAssertions.expectProductToExist(inventoryPage, inventoryDataSet.productNameForSelection);
     await inventoryPage.addProductToCartByName(inventoryDataSet.productNameForSelection);
-    await InventoryAssertions.expectItemIsAddedToCart(matchedItem);
-    await InventoryAssertions.expectOneItemIsAddedToCart(inventoryPage);
+    await InventoryAssertions.expectItemIsAddedToCart(inventoryPage, inventoryDataSet.productNameForSelection);
+    await InventoryAssertions.expectNumberOfItemsAddedToCart(inventoryPage, 1);
 });
 

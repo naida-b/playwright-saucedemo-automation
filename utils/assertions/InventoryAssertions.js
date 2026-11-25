@@ -29,12 +29,23 @@ class InventoryAssertions{
         }
     }
 
-    static async expectProductToExist(matchedItem){
+    static async expectProductToExist(inventoryPage, productName){
+        const matchedItem = inventoryPage.getProduct(productName);
         await expect(matchedItem).toHaveCount(1);
     }
 
-    static async expectItemIsAddedToCart(matchedItem){
-        await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+    static async expectProductsToExist(inventoryPage, productsNames){
+        for (const productName of productsNames) {
+            const matchedItem = inventoryPage.getProduct(productName);
+            await expect(matchedItem).toHaveCount(1);
+        }
+    }
+
+    static async expectItemsAreAddedToCart(inventoryPage, productsNames){
+        for (const productName of productsNames) {
+            const matchedItem = inventoryPage.getProduct(productName);
+            await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+        }
     }
 
     static async expectCartBadgeDisplayed(inventoryPage, numberOfItems){
@@ -42,8 +53,8 @@ class InventoryAssertions{
         await expect(inventoryPage.cartBadge).toHaveText(String(numberOfItems));
     }
 
-    static async expectOneItemIsAddedToCart(inventoryPage){
-        await expect(inventoryPage.removeButtons).toHaveCount(1);
+    static async expectNumberOfItemsAddedToCart(inventoryPage, count){
+        await expect(inventoryPage.removeButtons).toHaveCount(count);
     }
 }
 module.exports = InventoryAssertions;

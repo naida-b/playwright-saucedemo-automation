@@ -24,13 +24,18 @@ class InventoryPage{
         await matchedItem.locator('.btn_inventory').click();
     }
 
+    async addProductsToCartByName(productNames){
+        for (const productName of productNames) {
+            await this.addProductToCartByName(productName);
+        }
+    }
+
     getProduct(productName){
         const matchedItem = this.inventoryItems.filter({
             has: this.page.getByText(productName, { exact: true })
         });
 
         return matchedItem;
-
     }
 
     async getProductDetails(productName) {
@@ -44,6 +49,12 @@ class InventoryPage{
             price: await selectedProduct.locator('.inventory_item_price').textContent()
         };
     }
+
+    async getProductsDetails(productNames) {
+    return Promise.all(
+        productNames.map(productName => this.getProductDetails(productName))
+    );
+}
 
     async goToCart(){
        await this.cartIcon.click();
