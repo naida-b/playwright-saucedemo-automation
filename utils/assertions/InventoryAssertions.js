@@ -41,6 +41,12 @@ class InventoryAssertions{
         }
     }
 
+    static async expectItemIsAddedToCart(inventoryPage, productName) {
+        const matchedItem = inventoryPage.getProduct(productName);
+
+        await expect( matchedItem.locator('.btn_inventory')).toHaveText('Remove');
+    }
+
     static async expectItemsAreAddedToCart(inventoryPage, productsNames){
         for (const productName of productsNames) {
             const matchedItem = inventoryPage.getProduct(productName);

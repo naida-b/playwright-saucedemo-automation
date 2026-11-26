@@ -15,7 +15,6 @@ test('TC-CART-001 Verify cart badge quantity',async ({inventoryPage})=>{
 });
 
 test('TC-CART-002 Verify cart item matches selected inventory product', async ({ inventoryPage, page }) => {
-    const matchedItem = await inventoryPage.getProduct(inventoryDataSet.productNameForSelection);
     await InventoryAssertions.expectProductToExist(inventoryPage, inventoryDataSet.productNameForSelection);
     await inventoryPage.addProductToCartByName(inventoryDataSet.productNameForSelection);
     await InventoryAssertions.expectItemIsAddedToCart(inventoryPage, inventoryDataSet.productNameForSelection);
@@ -23,13 +22,12 @@ test('TC-CART-002 Verify cart item matches selected inventory product', async ({
     const inventoryDetails = await inventoryPage.getProductDetails(inventoryDataSet.productNameForSelection);
     await inventoryPage.goToCart();
     const cartPage = new CartPage(page);
-    await CartAssertions.expectCartItemToBeVisible(cartPage);
     await CartAssertions.expectOneCartItemVisible(cartPage);
     const cartDetails = await cartPage.getCartProductDetails();
     await CartAssertions.expectCartItemToMatchInventory(inventoryDetails,cartDetails);
 });
 
-test.only('TC-CART-003 Add two different products by name', async ({ inventoryPage, page }) => {
+test('TC-CART-003 Add two different products by name', async ({ inventoryPage, page }) => {
     await InventoryAssertions.expectProductsToExist(inventoryPage, inventoryDataSet.productsToAdd);
     await inventoryPage.addProductsToCartByName(inventoryDataSet.productsToAdd);
     await InventoryAssertions.expectItemsAreAddedToCart(inventoryPage, inventoryDataSet.productsToAdd);

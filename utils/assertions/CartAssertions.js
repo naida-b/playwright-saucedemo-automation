@@ -22,6 +22,7 @@ class CartAssertions{
     }
 
     static async expectCartItemsToMatchInventory(inventoryDetails, cartDetails) {
+       expect(cartDetails).toHaveLength(inventoryDetails.length);
        for(const inventoryDetail of inventoryDetails) {
             const cartDetail = cartDetails.find(cartItem => cartItem.name === inventoryDetail.name);
             expect(cartDetail).toBeDefined();
