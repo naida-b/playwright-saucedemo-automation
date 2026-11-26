@@ -62,5 +62,17 @@ class InventoryAssertions{
     static async expectNumberOfItemsAddedToCart(inventoryPage, count){
         await expect(inventoryPage.removeButtons).toHaveCount(count);
     }
+
+    static async expectCartBadgeEmpty(inventoryPage){
+        await expect(inventoryPage.cartBadge).toHaveCount(0);
+    }
+
+    static async expectCartIconToBeVisible(inventoryPage){
+        await expect(inventoryPage.cartIcon).toBeVisible();
+    }
+
+    static async expectCartToBeEmpty(inventoryPage){
+        await expect(inventoryPage.cartIcon).toHaveAttribute('aria-label', 'Cart, empty');
+    }
 }
 module.exports = InventoryAssertions;

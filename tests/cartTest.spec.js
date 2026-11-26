@@ -39,3 +39,16 @@ test('TC-CART-003 Add two different products by name', async ({ inventoryPage, p
     const cartDetails = await cartPage.getCartProductsDetails();
     await CartAssertions.expectCartItemsToMatchInventory(inventoryDetails,cartDetails);
 });
+
+test('TC-CART-004 Handle non-existing product', async ({ inventoryPage, page }) => {
+    const nonExistingProductName = "Non-Existing Product";
+    await InventoryAssertions.expectCartIconToBeVisible(inventoryPage);
+    await InventoryAssertions.expectCartBadgeEmpty(inventoryPage);
+    await expect(inventoryPage.addProductToCartByName(nonExistingProductName)).
+        rejects.toThrow(`Product with name "${nonExistingProductName}" not found.`);
+    await InventoryAssertions.expectCartBadgeEmpty(inventoryPage);
+    await InventoryAssertions.expectCartToBeEmpty(inventoryPage);
+    await inventoryPage.goToCart();
+    const cartPage = new CartPage(page);
+    await CartAssertions.expectCartItemsToBeVisible(cartPage, 0);
+});
