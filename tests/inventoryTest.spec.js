@@ -41,3 +41,54 @@ test('TC-INV-003 Verify that a product can be added to cart by matching its name
     await InventoryAssertions.expectNumberOfItemsAddedToCart(inventoryPage, 1);
 });
 
+test('TC-INV-004 sorting by Name (A to Z)',async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await LoginAssertions.expectLoginFormVisible(loginPage);
+    await loginPage.login(loginDataSet.standardUsername,loginDataSet.standardPassword);
+    const inventoryPage = new InventoryPage(page);
+    await InventoryAssertions.expectInventoryPageToBeOpenAndLoaded(inventoryPage, inventoryDataSet.inventoryPageItemListCount);
+    const initalProductList = inventoryPage.inventoryItems;
+    await inventoryPage.selectSortOption('az');
+    const sortedProductList = inventoryPage.inventoryItems;
+    await InventoryAssertions.expectProductsToBeSortedByNameAZ(initalProductList, sortedProductList);
+});
+
+test('TC-INV-005 sorting by Name (Z to A)',async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await LoginAssertions.expectLoginFormVisible(loginPage);
+    await loginPage.login(loginDataSet.standardUsername,loginDataSet.standardPassword);
+    const inventoryPage = new InventoryPage(page);
+    await InventoryAssertions.expectInventoryPageToBeOpenAndLoaded(inventoryPage, inventoryDataSet.inventoryPageItemListCount);
+    const initalProductList = inventoryPage.inventoryItems;
+    await inventoryPage.selectSortOption('za');
+    const sortedProductList = inventoryPage.inventoryItems;
+    await InventoryAssertions.expectProductsToBeSortedByNameZA(initalProductList, sortedProductList);
+});
+
+test('TC-INV-006 sorting by Price (low to high)',async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await LoginAssertions.expectLoginFormVisible(loginPage);
+    await loginPage.login(loginDataSet.standardUsername,loginDataSet.standardPassword);
+    const inventoryPage = new InventoryPage(page);
+    await InventoryAssertions.expectInventoryPageToBeOpenAndLoaded(inventoryPage, inventoryDataSet.inventoryPageItemListCount);
+    const initalProductList = inventoryPage.inventoryItems;
+    await inventoryPage.selectSortOption('lohi');
+    const sortedProductList = inventoryPage.inventoryItems;
+    await InventoryAssertions.expectProductsToBeSortedByPriceLowToHigh(initalProductList, sortedProductList);
+});
+
+test('TC-INV-007 sorting by Price (high to low)',async ({page})=>{
+    const loginPage = new LoginPage(page);
+    await loginPage.goTo();
+    await LoginAssertions.expectLoginFormVisible(loginPage);
+    await loginPage.login(loginDataSet.standardUsername,loginDataSet.standardPassword);
+    const inventoryPage = new InventoryPage(page);
+    await InventoryAssertions.expectInventoryPageToBeOpenAndLoaded(inventoryPage, inventoryDataSet.inventoryPageItemListCount);
+    const initalProductList = inventoryPage.inventoryItems;
+    await inventoryPage.selectSortOption('hilo');
+    const sortedProductList = inventoryPage.inventoryItems;
+    await InventoryAssertions.expectProductsToBeSortedByPriceHighToLow(initalProductList, sortedProductList);
+});

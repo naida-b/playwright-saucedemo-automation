@@ -8,6 +8,7 @@ class InventoryPage{
         this.cartIcon = page.locator('.shopping_cart_link');
         this.cartBadge = page.locator('.shopping_cart_badge');
         this.removeButtons = page.getByRole('button', { name: 'Remove' })
+        this.sortDropdown = page.getByRole('combobox', { name: 'Sort products' });
     }
 
     async addProductToCartByName(productName){
@@ -60,5 +61,8 @@ class InventoryPage{
        await this.cartIcon.click();
     }
 
+    async selectSortOption(optionText){
+        await this.sortDropdown.selectOption({ value: optionText });
+    }
 }
 module.exports = {InventoryPage};

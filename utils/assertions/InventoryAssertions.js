@@ -74,5 +74,33 @@ class InventoryAssertions{
     static async expectCartToBeEmpty(inventoryPage){
         await expect(inventoryPage.cartIcon).toHaveAttribute('aria-label', 'Cart, empty');
     }
+
+    static async expectProductsToBeSortedByNameAZ(initalProductList, sortedProductList){
+        const initialNames = await initalProductList.locator('.inventory_item_name').allTextContents();
+        const sortedNames = await sortedProductList.locator('.inventory_item_name').allTextContents();
+        const expectedSortedNames = [...initialNames].sort((a, b) => a.localeCompare(b));
+        expect(sortedNames).toEqual(expectedSortedNames);
+    }
+
+    static async expectProductsToBeSortedByNameZA(initalProductList, sortedProductList){
+        const initialNames = await initalProductList.locator('.inventory_item_name').allTextContents();
+        const sortedNames = await sortedProductList.locator('.inventory_item_name').allTextContents();
+        const expectedSortedNames = [...initialNames].sort((a, b) => b.localeCompare(a));
+        expect(sortedNames).toEqual(expectedSortedNames);
+    }
+
+    static async expectProductsToBeSortedByPriceLowToHigh(initalProductList, sortedProductList){
+        const initialPrices = await initalProductList.locator('.inventory_item_price').allTextContents();
+        const sortedPrices = await sortedProductList.locator('.inventory_item_price').allTextContents();
+        const expectedSortedPrices = [...initialPrices].sort((a, b) => parseFloat(a) - parseFloat(b));
+        expect(sortedPrices).toEqual(expectedSortedPrices);
+    }
+
+    static async expectProductsToBeSortedByPriceHighToLow(initalProductList, sortedProductList){
+        const initialPrices = await initalProductList.locator('.inventory_item_price').allTextContents();
+        const sortedPrices = await sortedProductList.locator('.inventory_item_price').allTextContents();
+        const expectedSortedPrices = [...initialPrices].sort((a, b) => parseFloat(b) - parseFloat(a));
+        expect(sortedPrices).toEqual(expectedSortedPrices);
+    }
 }
 module.exports = InventoryAssertions;
