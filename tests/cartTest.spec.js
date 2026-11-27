@@ -7,7 +7,6 @@ const CartAssertions = require('../utils/assertions/CartAssertions');
 const { test } = require('../fixtures/inventory.fixture');
 
 test('TC-CART-001 Verify cart badge quantity',async ({inventoryPage})=>{
-    const matchedItem = await inventoryPage.getProduct(inventoryDataSet.productNameForSelection);
     await InventoryAssertions.expectProductToExist(inventoryPage, inventoryDataSet.productNameForSelection);
     await inventoryPage.addProductToCartByName(inventoryDataSet.productNameForSelection);
     await InventoryAssertions.expectItemIsAddedToCart(inventoryPage, inventoryDataSet.productNameForSelection);

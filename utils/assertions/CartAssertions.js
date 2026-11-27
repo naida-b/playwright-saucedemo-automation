@@ -14,6 +14,8 @@ class CartAssertions{
 
     static async expectOneCartItemVisible(cartPage) {
        await expect(cartPage.cartItemName).toHaveCount(1);
+       await expect(cartPage.cartItemName).toBeVisible();
+       await expect(cartPage.cartItemPrice).toBeVisible();
     }
 
     static async expectCartItemToMatchInventory(inventoryDetails, cartDetails) {

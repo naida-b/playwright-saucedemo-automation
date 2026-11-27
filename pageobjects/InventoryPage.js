@@ -64,5 +64,13 @@ class InventoryPage{
     async selectSortOption(optionText){
         await this.sortDropdown.selectOption({ value: optionText });
     }
+
+    async getProductNames() {
+        return await this.inventoryItems.locator('.inventory_item_name').allTextContents();
+    }
+
+    async getProductPrices() {
+        return await this.inventoryItems.locator('.inventory_item_price').allTextContents();
+    }
 }
 module.exports = {InventoryPage};
