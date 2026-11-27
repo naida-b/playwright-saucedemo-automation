@@ -29,12 +29,29 @@ class InventoryAssertions{
         }
     }
 
-    static async expectProductToExist(matchedItem){
+    static async expectProductToExist(inventoryPage, productName){
+        const matchedItem = inventoryPage.getProduct(productName);
         await expect(matchedItem).toHaveCount(1);
     }
 
-    static async expectItemIsAddedToCart(matchedItem){
-        await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+    static async expectProductsToExist(inventoryPage, productsNames){
+        for (const productName of productsNames) {
+            const matchedItem = inventoryPage.getProduct(productName);
+            await expect(matchedItem).toHaveCount(1);
+        }
+    }
+
+    static async expectItemIsAddedToCart(inventoryPage, productName) {
+        const matchedItem = inventoryPage.getProduct(productName);
+
+        await expect( matchedItem.locator('.btn_inventory')).toHaveText('Remove');
+    }
+
+    static async expectItemsAreAddedToCart(inventoryPage, productsNames){
+        for (const productName of productsNames) {
+            const matchedItem = inventoryPage.getProduct(productName);
+            await expect(matchedItem.locator('.btn_inventory')).toHaveText("Remove");
+        }
     }
 
     static async expectCartBadgeDisplayed(inventoryPage, numberOfItems){
@@ -42,8 +59,40 @@ class InventoryAssertions{
         await expect(inventoryPage.cartBadge).toHaveText(String(numberOfItems));
     }
 
-    static async expectOneItemIsAddedToCart(inventoryPage){
-        await expect(inventoryPage.removeButtons).toHaveCount(1);
+    static async expectNumberOfItemsAddedToCart(inventoryPage, count){
+        await expect(inventoryPage.removeButtons).toHaveCount(count);
+    }
+
+    static async expectCartBadgeEmpty(inventoryPage){
+        await expect(inventoryPage.cartBadge).toHaveCount(0);
+    }
+
+    static async expectCartIconToBeVisible(inventoryPage){
+        await expect(inventoryPage.cartIcon).toBeVisible();
+    }
+
+    static async expectCartToBeEmpty(inventoryPage){
+        await expect(inventoryPage.cartIcon).toHaveAttribute('aria-label', 'Cart, empty');
+    }
+
+    static expectProductsToBeSortedByNameAZ(initalProductList, sortedProductList){
+        const expectedSortedNames = [...initalProductList].sort((a, b) => a.localeCompare(b));
+        expect(sortedProductList).toEqual(expectedSortedNames);
+    }
+
+    static expectProductsToBeSortedByNameZA(initalProductList, sortedProductList){
+        const expectedSortedNames = [...initalProductList].sort((a, b) => b.localeCompare(a));
+        expect(sortedProductList).toEqual(expectedSortedNames);
+    }
+
+    static  expectProductsToBeSortedByPriceLowToHigh(initalProductList, sortedProductList){
+        const expectedSortedPrices = [...initalProductList].sort((a, b) => parseFloat(a.replace('$', '')) - parseFloat(b.replace('$', '')));
+        expect(sortedProductList).toEqual(expectedSortedPrices);
+    }
+
+    static expectProductsToBeSortedByPriceHighToLow(initalProductList, sortedProductList){
+        const expectedSortedPrices = [...initalProductList].sort((a, b) => parseFloat(b.replace('$', '')) - parseFloat(a.replace('$', '')));
+        expect(sortedProductList).toEqual(expectedSortedPrices);
     }
 }
 module.exports = InventoryAssertions;

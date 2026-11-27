@@ -1,5 +1,7 @@
 {
     "inventoryPageItemListCount" : 6,
     "productNameForSelection": "Sauce Labs Fleece Jacket",
+    "productsToAdd": ["Sauce Labs Backpack","Sauce Labs Bike Light"],
+    "productsToAddCount": 2,
     "numberOfProductsAdded": 1
 }
